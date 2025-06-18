@@ -14,7 +14,7 @@ const Dashboard = () => {
         {/* Top Navbar */}
         <Navbar bg="primary" variant="dark" expand="lg" className="mb-4 shadow">
           <Container fluid>
-            <Navbar.Brand>Admin Dashboard</Navbar.Brand>
+            <Navbar.Brand></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse className="justify-content-end">
               <Nav>
@@ -41,7 +41,7 @@ const Dashboard = () => {
             <Col xs={12} md={6} lg={3}>
               <Card className="text-white bg-info shadow-sm">
                 <Card.Body>
-                  <Card.Title>Active Sessions</Card.Title>
+                  <Card.Title>Gallery </Card.Title>
                   <Card.Text style={{ fontSize: '24px' }}>75</Card.Text>
                 </Card.Body>
               </Card>
@@ -50,7 +50,7 @@ const Dashboard = () => {
             <Col xs={12} md={6} lg={3}>
               <Card className="text-white bg-warning shadow-sm">
                 <Card.Body>
-                  <Card.Title>New Signups</Card.Title>
+                  <Card.Title>Contact</Card.Title>
                   <Card.Text style={{ fontSize: '24px' }}>93</Card.Text>
                 </Card.Body>
               </Card>
@@ -59,8 +59,8 @@ const Dashboard = () => {
             <Col xs={12} md={6} lg={3}>
               <Card className="text-white bg-danger shadow-sm">
                 <Card.Body>
-                  <Card.Title>Revenue</Card.Title>
-                  <Card.Text style={{ fontSize: '24px' }}>₹48,000</Card.Text>
+                  <Card.Title>Vehicle Details</Card.Title>
+                  <Card.Text style={{ fontSize: '24px' }}>24</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
