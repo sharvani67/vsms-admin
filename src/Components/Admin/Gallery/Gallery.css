@@ -1,0 +1,20 @@
+/* Add this to your global CSS file */
+.page-content {
+  margin-left: 220px; /* Default sidebar width */
+}
+
+/* When sidebar is collapsed */
+.admin-nav-sidebar.collapsed ~ .page-content {
+  margin-left: 78px; /* Collapsed sidebar width */
+}
+
+/* Mobile responsive */
+@media (max-width: 767px) {
+  .admin-nav-sidebar.collapsed ~ .page-content {
+    margin-left: 50px; /* Mobile collapsed sidebar width */
+  }
+  
+  .page-content {
+    padding: 1rem !important; /* Smaller padding on mobile */
+  }
+}

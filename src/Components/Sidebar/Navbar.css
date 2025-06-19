@@ -1,0 +1,163 @@
+/* Header Styles */
+.admin-nav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: blueviolet;
+  padding: 10px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.admin-nav-header-left {
+  display: flex;
+  align-items: center;
+}
+
+.admin-nav-sidebar-toggle {
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.admin-nav-header-right {
+  display: flex;
+  align-items: center;
+}
+
+.admin-nav-header-icons {
+  display: flex;
+  align-items: center;
+}
+
+.admin-nav-icon-container {
+  position: relative;
+  margin-left: 20px;
+}
+
+.admin-nav-profile {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.admin-nav-profile-img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.admin-nav-caret-icon {
+  font-size: 16px;
+  color: #333;
+}
+
+.admin-nav-profile-dropdown {
+  position: absolute;
+  top: 45px;
+  right: 0;
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 10px 20px;
+  border-radius: 5px;
+  width: 200px;
+  z-index: 1001;
+}
+
+.admin-nav-profile-header {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.admin-nav-profile-item {
+  padding: 8px 0;
+  cursor: pointer;
+}
+
+.admin-nav-profile-item:hover {
+  background-color: #f1f1f1;
+}
+
+/* Sidebar Styles */
+.admin-nav-sidebar {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  bottom: 0;
+  background: blueviolet;
+  color: #464343;
+  transition: width 0.3s ease;
+  overflow-y: auto;
+  padding-top: 20px;
+  width: 220px;
+  z-index: 999;
+}
+
+.admin-nav-sidebar.collapsed {
+  width: 78px;
+}
+
+.admin-nav-position-sticky {
+  position: sticky;
+  top: 0;
+}
+
+.admin-nav-item {
+  list-style: none;
+}
+
+.admin-nav-item .nav-link {
+  display: flex;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  padding: 15px 20px;
+  transition: background-color 0.3s ease;
+}
+
+.admin-nav-item .nav-link:hover {
+  background-color: linear-gradient(90deg, #ff8757, #ff5757);
+}
+
+.admin-nav-icon {
+  margin-right: 10px;
+}
+
+.link_text {
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 16px;
+  color: #000;
+}
+
+.admin-nav-item.active .link_text {
+  color: rgb(24, 37, 102);
+}
+
+.admin-nav-item.active .nav-link {
+  background-color: white;
+  color: rgb(24, 37, 102);
+}
+
+/* Responsive Design */
+@media (max-width: 767px) {
+  .admin-nav-sidebar {
+    display: none;
+  }
+
+  .admin-nav-sidebar.collapsed {
+    display: block;
+    width: 50px;
+  }
+
+  .admin-nav-sidebar.collapsed .link_text {
+    display: none;
+  }
+
+  .admin-nav-company-logo {
+    width: 105px;
+  }
+}

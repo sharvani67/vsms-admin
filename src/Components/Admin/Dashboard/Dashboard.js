@@ -6,24 +6,11 @@ import Sidebar from '../../Sidebar/Sidebar'; // adjust path if needed
 const Dashboard = () => {
   return (
     <div className="d-flex">
-      {/* Sidebar */}
-      <Sidebar />
+     
 
       {/* Main Content */}
       <div className="flex-grow-1" style={{ marginLeft: '100px' }}>
-        {/* Top Navbar */}
-        <Navbar bg="primary" variant="dark" expand="lg" className="mb-4 shadow">
-          <Container fluid>
-            <Navbar.Brand></Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse className="justify-content-end">
-              <Nav>
-                <Nav.Link href="#">Profile</Nav.Link>
-                <Nav.Link href="#">Logout</Nav.Link>
-              </Nav>
-            </Navbar.Collapse>
-          </Container>
-        </Navbar>
+     
 
         {/* Dashboard Content */}
         <Container fluid>
