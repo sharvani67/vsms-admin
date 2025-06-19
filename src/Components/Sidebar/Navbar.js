@@ -1,13 +1,12 @@
+// Navbar.jsx
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { FaHome, FaCaretDown } from "react-icons/fa";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { FaCaretDown, FaHome, FaCarSide, FaPhoneAlt, FaImages } from "react-icons/fa";
 import { IoMenu } from "react-icons/io5";
+import logo from '../../assets/vsms-logo.jpg';
 import "./Navbar.css";
-import { useNavigate, useLocation } from 'react-router-dom';
-import logo from '../../assets/vsms-logo.jpg'
 
-const Navbar = ({  onToggleSidebar }) => {
- 
+const Navbar = ({ onToggleSidebar }) => {
   const [collapsed, setCollapsed] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
@@ -29,7 +28,7 @@ const Navbar = ({  onToggleSidebar }) => {
   };
 
   const handleLogout = () => {
-    navigate('/');
+    navigate("/");
   };
 
   return (
@@ -40,25 +39,19 @@ const Navbar = ({  onToggleSidebar }) => {
             <IoMenu className="toggle-icon" />
           </div>
           &nbsp;&nbsp;
-          <img src={logo} alt="Logo" className="admin-nav-company-logo" style={{width: "150px", height: "50px", borderRadius: "8px"}}/>
+          <img src={logo} alt="Logo" className="admin-nav-company-logo" style={{ width: "80px", height: "50px", borderRadius: "8px" }} />
         </div>
 
         <div className="admin-nav-header-right">
           <div className="admin-nav-header-icons">
             <div className="admin-nav-icon-container" onClick={handleProfileClick}>
               <div className="admin-nav-profile">
-                <img
-                  src="https://i.pravatar.cc/100?img=4"
-                  alt="Profile"
-                  className="admin-nav-profile-img"
-                />
+                <img src="https://i.pravatar.cc/100?img=4" alt="Profile" className="admin-nav-profile-img" />
                 <FaCaretDown className="admin-nav-caret-icon" />
               </div>
               {showDropdown && (
                 <div className="admin-nav-profile-dropdown">
-                  <div className="admin-nav-profile-header">
-                    <strong>Admin</strong>
-                  </div>
+                  <div className="admin-nav-profile-header"><strong>Admin</strong></div>
                   <div className="admin-nav-profile-item" onClick={handleLogout}>Sign Out</div>
                 </div>
               )}
@@ -70,21 +63,24 @@ const Navbar = ({  onToggleSidebar }) => {
       <div className={`admin-nav-sidebar ${collapsed ? "collapsed" : ""}`}>
         <div className="admin-nav-position-sticky">
           <ul className="nav flex-column">
-            <li className={`admin-nav-item ${location.pathname === "/leads" ? "active" : ""}`}>
-            <Link className="nav-link" to="/dashboard" onClick={handleNavItemClick}>
+            <li className="admin-nav-item">
+              <Link className={`nav-link ${location.pathname === "/dashboard" ? "active" : ""}`} to="/dashboard" onClick={handleNavItemClick}>
                 <FaHome className="admin-nav-icon" />
                 {!collapsed && <span className="link_text">Dashboard</span>}
               </Link>
-              <Link className="nav-link" to="/details" onClick={handleNavItemClick}>
-                <FaHome className="admin-nav-icon" />
+
+              <Link className={`nav-link ${location.pathname === "/details" ? "active" : ""}`} to="/details" onClick={handleNavItemClick}>
+                <FaCarSide className="admin-nav-icon" />
                 {!collapsed && <span className="link_text">Car Details</span>}
               </Link>
-              <Link className="nav-link" to="/contact" onClick={handleNavItemClick}>
-                <FaHome className="admin-nav-icon" />
+
+              <Link className={`nav-link ${location.pathname === "/contact" ? "active" : ""}`} to="/contact" onClick={handleNavItemClick}>
+                <FaPhoneAlt className="admin-nav-icon" />
                 {!collapsed && <span className="link_text">Contact</span>}
               </Link>
-              <Link className="nav-link" to="/gallery" onClick={handleNavItemClick}>
-                <FaHome className="admin-nav-icon" />
+
+              <Link className={`nav-link ${location.pathname === "/gallery" ? "active" : ""}`} to="/gallery" onClick={handleNavItemClick}>
+                <FaImages className="admin-nav-icon" />
                 {!collapsed && <span className="link_text">Gallery</span>}
               </Link>
             </li>

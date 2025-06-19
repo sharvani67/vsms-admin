@@ -1,20 +1,23 @@
-import React from 'react';
-import { Container, Row, Col, Card, Navbar, Nav } from 'react-bootstrap';
-import Sidebar from '../../Sidebar/Sidebar'; // adjust path if needed
-
+import React, { useState } from "react";
+import { Container, Row, Col, Card } from 'react-bootstrap';
+import Navbar from '../../Sidebar/Navbar';
 
 const Dashboard = () => {
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+
   return (
-    <div className="d-flex">
-     
+    <div className="dashboard-wrapper">
+      {/* Top Navbar */}
+      <Navbar
+        collapsed={sidebarCollapsed}
+        onToggleSidebar={(collapsed) => setSidebarCollapsed(collapsed)}
+      />
 
       {/* Main Content */}
-      <div className="flex-grow-1" style={{ marginLeft: '100px' }}>
-     
-
-        {/* Dashboard Content */}
+      <div className={`dashboard-content ${sidebarCollapsed ? 'collapsed' : ''}`}>
         <Container fluid>
           <h2 className="mb-4 text-center">Welcome, Admin!</h2>
+
           <Row className="g-4">
             <Col xs={12} md={6} lg={3}>
               <Card className="text-white bg-success shadow-sm">
@@ -28,7 +31,7 @@ const Dashboard = () => {
             <Col xs={12} md={6} lg={3}>
               <Card className="text-white bg-info shadow-sm">
                 <Card.Body>
-                  <Card.Title>Gallery </Card.Title>
+                  <Card.Title>Gallery</Card.Title>
                   <Card.Text style={{ fontSize: '24px' }}>75</Card.Text>
                 </Card.Body>
               </Card>
@@ -53,7 +56,7 @@ const Dashboard = () => {
             </Col>
           </Row>
 
-          {/* Section Placeholder */}
+          {/* Recent Activity Section */}
           <Row className="mt-5">
             <Col>
               <Card className="shadow-sm">
@@ -66,6 +69,30 @@ const Dashboard = () => {
           </Row>
         </Container>
       </div>
+
+      {/* Embedded Responsive Styles */}
+      <style>{`
+        .dashboard-wrapper {
+          margin-top: 60px;
+        }
+
+        .dashboard-content {
+          margin-left: 220px;
+          padding: 2rem;
+          transition: margin-left 0.3s ease;
+        }
+
+        .dashboard-content.collapsed {
+          margin-left: 100px;
+        }
+
+        @media (max-width: 767px) {
+          .dashboard-content {
+            margin-left: 0 !important;
+            padding: 1rem !important;
+          }
+        }
+      `}</style>
     </div>
   );
 };

@@ -3,7 +3,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: blueviolet;
+  background: linear-gradient(90deg, #1d1d45, #1b1c3a);
   padding: 10px 20px;
   position: fixed;
   top: 0;
@@ -20,6 +20,7 @@
 .admin-nav-sidebar-toggle {
   cursor: pointer;
   font-size: 24px;
+  color: white;
 }
 
 .admin-nav-header-right {
@@ -41,6 +42,7 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  color: white;
 }
 
 .admin-nav-profile-img {
@@ -48,11 +50,12 @@
   height: 35px;
   border-radius: 50%;
   margin-right: 10px;
+  border: 2px solid white;
 }
 
 .admin-nav-caret-icon {
   font-size: 16px;
-  color: #333;
+  color: white;
 }
 
 .admin-nav-profile-dropdown {
@@ -87,8 +90,8 @@
   top: 60px;
   left: 0;
   bottom: 0;
-  background: blueviolet;
-  color: #464343;
+  background: #1e1f3e;
+  color: white;
   transition: width 0.3s ease;
   overflow-y: auto;
   padding-top: 20px;
@@ -116,10 +119,12 @@
   text-decoration: none;
   padding: 15px 20px;
   transition: background-color 0.3s ease;
+  font-size: 16px;
+  border-left: 4px solid transparent;
 }
 
 .admin-nav-item .nav-link:hover {
-  background-color: linear-gradient(90deg, #ff8757, #ff5757);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .admin-nav-icon {
@@ -130,16 +135,19 @@
   display: inline-block;
   margin-left: 10px;
   font-size: 16px;
-  color: #000;
+  color: white;
 }
 
-.admin-nav-item.active .link_text {
-  color: rgb(24, 37, 102);
+.admin-nav-item .nav-link.active {
+  background-color: #ffffff;
+  color: #1e1f3e;
+  font-weight: bold;
+  border-left: 4px solid #3c45ff;
 }
 
-.admin-nav-item.active .nav-link {
-  background-color: white;
-  color: rgb(24, 37, 102);
+.admin-nav-item .nav-link.active .link_text,
+.admin-nav-item .nav-link.active .admin-nav-icon {
+  color: #1e1f3e;
 }
 
 /* Responsive Design */
@@ -150,7 +158,7 @@
 
   .admin-nav-sidebar.collapsed {
     display: block;
-    width: 50px;
+    width: 60px;
   }
 
   .admin-nav-sidebar.collapsed .link_text {
@@ -158,6 +166,6 @@
   }
 
   .admin-nav-company-logo {
-    width: 105px;
+    width: 100px;
   }
 }
