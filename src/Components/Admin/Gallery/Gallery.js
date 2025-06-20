@@ -1,25 +1,72 @@
 import React, { useState } from "react";
 import { Form, Button, Card, Row, Col, Alert } from 'react-bootstrap';
 import Navbar from '../../Sidebar/Navbar';
+import baseURL from '../../../Baseurl/BaseUrl';
 
 const Gallery = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [uploadType, setUploadType] = useState('image');
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
-  // File size check: 2MB for image, 10MB for video
+  const [formData, setFormData] = useState({
+    name: '',
+    description: '',
+    file: null,
+  });
+
+  // Handle text and textarea input change
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  // Handle file change and size validation
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
-    const maxSize = uploadType === 'image' ? 2 * 1024 * 1024 : 10 * 1024 * 1024; // 2MB or 10MB
+    const maxSize = uploadType === 'image' ? 2 * 1024 * 1024 : 10 * 1024 * 1024;
 
     if (file.size > maxSize) {
       const typeText = uploadType === 'image' ? '2MB' : '10MB';
       setError(`❌ ${uploadType.charAt(0).toUpperCase() + uploadType.slice(1)} must be less than ${typeText}`);
-      e.target.value = ''; // clear the file input
+      e.target.value = '';
     } else {
       setError('');
+      setFormData({ ...formData, file });
+    }
+  };
+
+  // Handle form submit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    setSuccess('');
+
+    if (!formData.file || !formData.name) {
+      setError("Name and File are required.");
+      return;
+    }
+
+    const payload = new FormData();
+    payload.append('type', uploadType);
+    payload.append('name', formData.name);
+    payload.append('description', formData.description);
+    payload.append('file', formData.file);
+
+    try {
+      const response = await fetch(`${baseURL}/gallery`, {
+        method: 'POST',
+        body: payload,
+      });
+
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || "Upload failed");
+
+      setSuccess(` ${uploadType === 'image' ? 'Image' : 'Video'} uploaded successfully!`);
+      setFormData({ name: '', description: '', file: null });
+    } catch (err) {
+      setError(`❌ ${err.message}`);
     }
   };
 
@@ -42,13 +89,10 @@ const Gallery = () => {
           <Card.Body>
             <h2 className="text-center mb-4">🎨 Gallery Upload</h2>
 
-            {error && (
-              <Alert variant="danger" className="text-center">
-                {error}
-              </Alert>
-            )}
+            {error && <Alert variant="danger" className="text-center">{error}</Alert>}
+            {success && <Alert variant="success" className="text-center">{success}</Alert>}
 
-            <Form>
+            <Form onSubmit={handleSubmit}>
               <Form.Group className="mb-4">
                 <Form.Label>📁 Select Upload Type</Form.Label>
                 <div>
@@ -74,63 +118,41 @@ const Gallery = () => {
               </Form.Group>
 
               <Row>
-                {uploadType === "image" && (
-                  <>
-                    <Col xs={12} md={6}>
-                      <Form.Group className="mb-3" controlId="imageName">
-                        <Form.Label>🖼 Image Name</Form.Label>
-                        <Form.Control type="text" placeholder="Enter image name" />
-                      </Form.Group>
-                    </Col>
+                <Col xs={12} md={6}>
+                  <Form.Group className="mb-3" controlId="name">
+                    <Form.Label>{uploadType === "image" ? "🖼 Image Name" : "🎬 Video Name"}</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder={`Enter ${uploadType} name`}
+                      value={formData.name}
+                      onChange={handleInputChange}
+                    />
+                  </Form.Group>
+                </Col>
 
-                    <Col xs={12} md={6}>
-                      <Form.Group className="mb-3" controlId="imageUpload">
-                        <Form.Label>📤 Upload Image</Form.Label>
-                        <Form.Control
-                          type="file"
-                          accept="image/*"
-                          onChange={handleFileChange}
-                        />
-                      </Form.Group>
-                    </Col>
+                <Col xs={12} md={6}>
+                  <Form.Group className="mb-3" controlId="file">
+                    <Form.Label>📤 Upload {uploadType === "image" ? "Image" : "Video"}</Form.Label>
+                    <Form.Control
+                      type="file"
+                      accept={uploadType === 'image' ? 'image/*' : 'video/*'}
+                      onChange={handleFileChange}
+                    />
+                  </Form.Group>
+                </Col>
 
-                    <Col xs={12}>
-                      <Form.Group className="mb-3" controlId="imageDesc">
-                        <Form.Label>📝 Description</Form.Label>
-                        <Form.Control as="textarea" rows={3} placeholder="Write a description..." />
-                      </Form.Group>
-                    </Col>
-                  </>
-                )}
-
-                {uploadType === "video" && (
-                  <>
-                    <Col xs={12} md={6}>
-                      <Form.Group className="mb-3" controlId="videoName">
-                        <Form.Label>🎬 Video Name</Form.Label>
-                        <Form.Control type="text" placeholder="Enter video name" />
-                      </Form.Group>
-                    </Col>
-
-                    <Col xs={12} md={6}>
-                      <Form.Group className="mb-3" controlId="videoUpload">
-                        <Form.Label>📤 Upload Video</Form.Label>
-                        <Form.Control
-                          type="file"
-                          accept="video/*"
-                          onChange={handleFileChange}
-                        />
-                      </Form.Group>
-                    </Col>
-
-                    <Col xs={12}>
-                      <Form.Group className="mb-3" controlId="videoDesc">
-                        <Form.Label>📝 Description</Form.Label>
-                        <Form.Control as="textarea" rows={3} placeholder="Write a description..." />
-                      </Form.Group>
-                    </Col>
-                  </>
-                )}
+                <Col xs={12}>
+                  <Form.Group className="mb-3" controlId="description">
+                    <Form.Label>📝 Description</Form.Label>
+                    <Form.Control
+                      as="textarea"
+                      rows={3}
+                      placeholder="Write a description..."
+                      value={formData.description}
+                      onChange={handleInputChange}
+                    />
+                  </Form.Group>
+                </Col>
               </Row>
 
               <div className="text-center">
