@@ -150,7 +150,7 @@ const Contact = () => {
                   <Table bordered hover>
                     <thead className="table-dark">
                       <tr>
-                        <th>SNO</th>
+                        <th>S.No</th>
                         <th>Name</th>
                         <th>Phone</th>
                         <th>Email</th>

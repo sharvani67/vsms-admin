@@ -7,6 +7,7 @@ import Gallery from './Components/Admin/Gallery/Gallery';
 import Contact from './Components/Admin/Contact/Contact';
 import VehicleDetails from './Components/Admin/VehicleDetails/VehicleDetails';
 import GalleryTable from './Components/Admin/Gallery/GalleryTable';
+import VehicleTable from './Components/Admin/VehicleDetails/VehicleTable';
 
 
 
@@ -21,6 +22,7 @@ const App = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/details" element={<VehicleDetails />} />
           <Route path="/gallery-table" element={<GalleryTable />} />
+           <Route path="/details-table" element={<VehicleTable />} />
       </Routes>
     </Router>
   );

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Card, Spinner, Alert } from 'react-bootstrap';
+import { Table, Card, Spinner, Alert, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import baseURL from '../../../Baseurl/BaseUrl';
 import Navbar from '../../Sidebar/Navbar';
 
@@ -8,6 +9,7 @@ const GalleryTable = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchGallery = async () => {
@@ -46,7 +48,12 @@ const GalleryTable = () => {
       >
         <Card className="shadow-sm">
           <Card.Body>
-            <h2 className="text-center mb-4">📸 Gallery Items</h2>
+            <div className="d-flex justify-content-between align-items-center mb-4">
+              <h2 className="mb-0">📸 Gallery Items</h2>
+              <Button variant="primary" onClick={() => navigate('/gallery')}>
+                Add New
+              </Button>
+            </div>
 
             {loading && (
               <div className="text-center">
@@ -60,7 +67,7 @@ const GalleryTable = () => {
               <Table bordered responsive hover>
                 <thead className="table-dark text-center">
                   <tr>
-                    <th>#</th>
+                    <th>S.No</th>
                     <th>Type</th>
                     <th>Name</th>
                     <th>Description</th>
@@ -84,11 +91,7 @@ const GalleryTable = () => {
                               style={{ width: '100px', height: 'auto', borderRadius: '6px' }}
                             />
                           ) : (
-                            <video
-                              controls
-                              width="150"
-                              style={{ borderRadius: '6px' }}
-                            >
+                            <video controls width="150" style={{ borderRadius: '6px' }}>
                               <source
                                 src={`${baseURL.replace('/api', '')}/uploads/${item.file}`}
                                 type="video/mp4"

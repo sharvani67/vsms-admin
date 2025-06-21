@@ -69,7 +69,7 @@ const Navbar = ({ onToggleSidebar }) => {
                 {!collapsed && <span className="link_text">Dashboard</span>}
               </Link>
 
-              <Link className={`nav-link ${location.pathname === "/details" ? "active" : ""}`} to="/details" onClick={handleNavItemClick}>
+              <Link className={`nav-link ${location.pathname === "/details-table" ? "active" : ""}`} to="/details-table" onClick={handleNavItemClick}>
                 <FaCarSide className="admin-nav-icon" />
                 {!collapsed && <span className="link_text">Car Details</span>}
               </Link>
@@ -79,7 +79,7 @@ const Navbar = ({ onToggleSidebar }) => {
                 {!collapsed && <span className="link_text">Contact</span>}
               </Link>
 
-              <Link className={`nav-link ${location.pathname === "/gallery" ? "active" : ""}`} to="/gallery" onClick={handleNavItemClick}>
+              <Link className={`nav-link ${location.pathname === "/gallery-table" ? "active" : ""}`} to="/gallery-table" onClick={handleNavItemClick}>
                 <FaImages className="admin-nav-icon" />
                 {!collapsed && <span className="link_text">Gallery</span>}
               </Link>
