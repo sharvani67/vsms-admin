@@ -14,6 +14,7 @@ const Gallery = () => {
     description: '',
     file: null,
   });
+// comment1
 
   // Handle text and textarea input change
   const handleInputChange = (e) => {
